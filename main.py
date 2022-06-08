@@ -15,7 +15,8 @@ window = Tk()
 window.title('Paint')
 canvas = Canvas(width=s.WIDTH, height=s.HEIGHT, bg=s.BG_COLOR)
 
-# Функции для рисования линии
+
+# Drawing funcs
 def draw(_event):
     x1 = _event.x - brush_size
     y1 = _event.y - brush_size
@@ -35,6 +36,7 @@ def active_paint(_event):
 canvas.bind('<1>', active_paint)
 
 
+# Drawing shapes funcs
 def change_fp(_event):
     global l_x1, l_y1
     l_x1, l_y1 = _event.x, _event.y # l_x1 = _event.x и l_y1 = _event.y
@@ -60,7 +62,6 @@ canvas.bind('<3>', change_fp)
 canvas.bind('<ButtonRelease-3>', draw_shape)
 
 
-
 def change_color(cvet):
     global color
     color = cvet
@@ -71,7 +72,6 @@ def change_color(cvet):
         er_btn.config(bg='light grey')
         br_btn.config(bg='white')
     
-
 
 def change_brush_size(event):
     global brush_size
@@ -102,8 +102,6 @@ line_btn = Button(image=line_icon, command=lambda: change_shape_state('line'))
 square_btn = Button(image=square_icon, command=lambda: change_shape_state('square'))
 oval_btn = Button(image=oval_icon, command=lambda: change_shape_state('oval'))
 
-
-
 slider.grid(row=1, column=3, columnspan=4)
 br_btn.grid(row=1, column=7)
 er_btn.grid(row=1, column=8)
@@ -114,7 +112,6 @@ square_btn.grid(row=1, column=11)
 oval_btn.grid(row=1, column=12)
 
 
-
 canvas.grid(row=2,
             column=3,
             rowspan=50,
@@ -122,7 +119,8 @@ canvas.grid(row=2,
             padx=5,
             pady=5)
 
-#----------------------
+
+# Change color sidebar
 def create_color_btn(_color, _row, _column):
     btn = Button(width=2, height=1, bg=_color,
                  command=lambda : change_color(_color))
@@ -132,7 +130,6 @@ def create_color_btn(_color, _row, _column):
 def get_color():
     global color
     color = askcolor(title='Color Picker')[1]
-
 
 
 colors = [['#2acaea', '#FFD700', '#FF0000'],
@@ -151,6 +148,5 @@ for i in range(rows):
 picker_btn = Button(text='Color Picker', width=10,
                     command=get_color)
 picker_btn.grid(row=i+3, columnspan=3)
-
 
 window.mainloop()
